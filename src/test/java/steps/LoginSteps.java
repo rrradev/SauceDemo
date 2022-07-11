@@ -5,16 +5,21 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java8.En;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.JavascriptExecutor;
 import pages.LoginPage;
+import pages.ProductsPage;
 import steps.config.BaseSteps;
 
 public class LoginSteps extends BaseSteps implements En {
 
     LoginPage loginPage;
+    ProductsPage productsPage;
 
     public LoginSteps() {
         Given("^.* is on the Login Page$", () -> {
+            driver.manage().deleteAllCookies();
             driver.get("https://www.saucedemo.com/");
+            ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();");
             loginPage = new LoginPage(driver);
         });
 
@@ -44,6 +49,14 @@ public class LoginSteps extends BaseSteps implements En {
             Assertions.assertThat(loginPage.readFrom(loginPage.getErrorMsg()))
                     .as("Is correct error message displayed?")
                     .contains(error);
+        });
+
+        Then("^.* should see the Products page:$", () -> {
+            productsPage = new ProductsPage(driver);
+
+            Assertions.assertThat(productsPage.readFrom(productsPage.getTitle()))
+                    .as("Correct title is displayed")
+                    .isEqualToIgnoringCase("Products");
         });
     }
 }
