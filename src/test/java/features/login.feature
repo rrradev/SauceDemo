@@ -22,4 +22,14 @@ Feature: Login
       | SAERSADA        | KLASDd       | Username and password do not match any user in this service |
       | locked_out_user | secret_sauce | Sorry, this user has been locked out.                       |
 #######################################################################
+  Scenario Outline: Log in with correct credentials
+    When Alex logs in with her credentials:
+      | username   | password   |
+      | <username> | <password> |
+    Then she should see the Products page:
+    Examples:
+      | username                | password     |
+      | standard_user           | secret_sauce |
+      | problem_user            | secret_sauce |
+      | performance_glitch_user | secret_sauce |
 
