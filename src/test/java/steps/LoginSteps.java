@@ -42,7 +42,7 @@ public class LoginSteps extends BaseSteps implements En {
             String error = table.transpose().asMap().get("error");
 
             Assertions.assertThat(loginPage.readFrom(loginPage.getErrorMsg()))
-                    .as("Is correct message displayed?")
+                    .as("Is correct error message displayed?")
                     .contains(error);
         });
     }
