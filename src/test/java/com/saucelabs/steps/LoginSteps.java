@@ -2,7 +2,6 @@ package com.saucelabs.steps;
 
 import com.saucelabs.enitities.User;
 import com.saucelabs.steps.config.BaseSteps;
-import com.saucelabs.utils.ConfigHelper;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java8.En;
 import org.assertj.core.api.Assertions;
@@ -39,9 +38,7 @@ public class LoginSteps extends BaseSteps implements En {
         });
 
         When("^.* logs? in with .* credentials:$", (User user) -> {
-            loginPage.type(loginPage.getUsernameFld(), user.getUsername());
-            loginPage.type(loginPage.getPasswordFld(), user.getPassword());
-            loginPage.click(loginPage.getLoginBtn());
+            productsPage = loginPage.logIn(user);
         });
 
         Then("^.* should see the correct error:$", (DataTable table) -> {
@@ -53,8 +50,6 @@ public class LoginSteps extends BaseSteps implements En {
         });
 
         Then("^.* should see the Products page:$", () -> {
-            productsPage = new ProductsPage(driver);
-
             Assertions.assertThat(productsPage.readFrom(productsPage.getTitle()))
                     .as("Correct title is displayed")
                     .isEqualToIgnoringCase("Products");

@@ -24,6 +24,10 @@ public abstract class BasePage {
                 ));
     }
 
+    public void waitToBeVisible(WebElement element) {
+        waitToBeVisible(element, DEFAULT_WAIT_DURATION);
+    }
+
     public void waitToBeClickable(WebElement element, Duration interval) {
         final WebDriverWait wait = new WebDriverWait(driver, interval);
         wait.pollingEvery(Duration.ofMillis(100))
