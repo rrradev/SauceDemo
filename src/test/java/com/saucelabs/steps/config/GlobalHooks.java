@@ -1,4 +1,4 @@
-package steps.config;
+package com.saucelabs.steps.config;
 
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.EventHandler;

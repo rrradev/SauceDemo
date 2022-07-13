@@ -1,14 +1,18 @@
-package steps.config;
+package com.saucelabs.steps.config;
 
+import com.saucelabs.utils.ConfigHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public abstract class BaseSteps {
+
+    protected static final ConfigHelper CONFIG = ConfigHelper.getInstance();
     protected static WebDriver driver;
 
-    protected void setupDriver() {
+
+     void setupDriver() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();

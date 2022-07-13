@@ -1,24 +1,25 @@
-package steps;
+package com.saucelabs.steps;
 
-import enitities.User;
+import com.saucelabs.enitities.User;
+import com.saucelabs.steps.config.BaseSteps;
+import com.saucelabs.utils.ConfigHelper;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java8.En;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.JavascriptExecutor;
-import pages.LoginPage;
-import pages.ProductsPage;
-import steps.config.BaseSteps;
+import com.saucelabs.pages.LoginPage;
+import com.saucelabs.pages.ProductsPage;
 
 public class LoginSteps extends BaseSteps implements En {
 
-    LoginPage loginPage;
-    ProductsPage productsPage;
+    private LoginPage loginPage;
+    private ProductsPage productsPage;
 
     public LoginSteps() {
         Given("^.* is on the Login Page$", () -> {
             driver.manage().deleteAllCookies();
-            driver.get("https://www.saucedemo.com/");
+            driver.get(CONFIG.getUrl());
             ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();");
             loginPage = new LoginPage(driver);
         });

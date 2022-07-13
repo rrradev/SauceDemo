@@ -1,4 +1,4 @@
-package pages.config;
+package com.saucelabs.pages.config;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

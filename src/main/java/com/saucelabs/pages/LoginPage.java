@@ -1,10 +1,10 @@
-package pages;
+package com.saucelabs.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.config.BasePage;
+import com.saucelabs.pages.config.BasePage;
 
 public class LoginPage extends BasePage {
 
