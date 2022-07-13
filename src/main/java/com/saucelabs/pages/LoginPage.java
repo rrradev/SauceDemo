@@ -1,5 +1,6 @@
 package com.saucelabs.pages;
 
+import com.saucelabs.enitities.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,5 +40,13 @@ public class LoginPage extends BasePage {
 
     public WebElement getErrorMsg() {
         return errorMsg;
+    }
+
+    public ProductsPage logIn(User user) {
+        type(usernameFld, user.getUsername());
+        type(passwordFld, user.getPassword());
+        click(loginBtn);
+
+        return new ProductsPage(driver);
     }
 }

@@ -11,7 +11,6 @@ public abstract class BaseSteps {
     protected static final ConfigHelper CONFIG = ConfigHelper.getInstance();
     protected static WebDriver driver;
 
-
      void setupDriver() {
         WebDriverManager.chromedriver().setup();
 
