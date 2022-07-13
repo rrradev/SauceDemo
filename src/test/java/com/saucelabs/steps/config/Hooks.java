@@ -1,4 +1,4 @@
-package steps.config;
+package com.saucelabs.steps.config;
 
 import io.cucumber.java8.LambdaGlue;
 import io.cucumber.java8.Scenario;

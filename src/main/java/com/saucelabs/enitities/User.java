@@ -1,4 +1,4 @@
-package enitities;
+package com.saucelabs.enitities;
 
 public class User {
 

@@ -1,6 +1,6 @@
-package steps.config;
+package com.saucelabs.steps.config;
 
-import enitities.User;
+import com.saucelabs.enitities.User;
 import io.cucumber.java8.LambdaGlue;
 
 import java.util.Map;
