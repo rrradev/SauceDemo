@@ -3,7 +3,6 @@ Feature: Login
 
   Background:
     Given the user is on the Login Page
-
 #######################################################################
   Scenario: The user can see the login form
     Then he/she should see the login form
@@ -33,4 +32,5 @@ Feature: Login
       | standard_user           | secret_sauce |
       | problem_user            | secret_sauce |
       | performance_glitch_user | secret_sauce |
+#######################################################################
 

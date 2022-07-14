@@ -43,14 +43,14 @@ public class ConfigHelper {
     }
 
     public String getUsername() {
-        String url = properties.getProperty("username");
-        if (url != null) return url;
+        String username = properties.getProperty("username");
+        if (username != null) return username;
         else throw new RuntimeException("username not specified in the config.properties file");
     }
 
     public String getPassword() {
-        String url = properties.getProperty("password");
-        if (url != null) return url;
+        String password = properties.getProperty("password");
+        if (password != null) return password;
         else throw new RuntimeException("password not specified in the config.properties file");
     }
 }
