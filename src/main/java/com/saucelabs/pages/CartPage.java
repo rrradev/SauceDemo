@@ -2,6 +2,7 @@ package com.saucelabs.pages;
 
 import com.saucelabs.enitities.Item;
 import com.saucelabs.pages.config.Header;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,7 +29,11 @@ public class CartPage extends Header {
     public List<Item> getItems() {
         List<Item> items = new ArrayList<>();
 
-        waitToBeVisible(itemContainer);
+        try {
+            waitToBeVisible(itemContainer);
+        } catch (TimeoutException te) {
+            return items;
+        }
 
         for (WebElement targetElement : itemContainers) {
             String itemName = readFrom(targetElement.findElement(ITEM_NAME));
@@ -43,5 +48,11 @@ public class CartPage extends Header {
         }
 
         return items;
+    }
+
+    public boolean isEmpty() {
+        waitForPageToLoad();
+
+        return !canSee(itemContainer);
     }
 }

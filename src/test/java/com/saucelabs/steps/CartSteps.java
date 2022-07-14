@@ -31,7 +31,7 @@ public class CartSteps extends BaseSteps implements En {
             randomItemAdded = productsPage.addRandomItemToCart();
         });
 
-        And("^.* navigates? to the Cart page$", () -> {
+        When("^.* navigates? to the Cart page$", () -> {
             productsPage.click(productsPage.getCartBtn());
         });
 
@@ -45,5 +45,12 @@ public class CartSteps extends BaseSteps implements En {
                     .isEqualTo(Collections.singletonList(randomItemAdded));
         });
 
+        Then("^the cart page should be empty$", () -> {
+            cartPage = new CartPage(driver);
+
+            Assertions.assertThat(cartPage.isEmpty())
+                    .as("Cart is empty")
+                    .isTrue();
+        });
     }
 }
