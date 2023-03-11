@@ -11,13 +11,14 @@ public abstract class BaseSteps {
     protected static final ConfigHelper CONFIG = ConfigHelper.getInstance();
     protected static WebDriver driver;
 
-     void setupDriver() {
+    void setupDriver() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
