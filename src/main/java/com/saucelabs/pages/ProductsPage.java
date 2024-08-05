@@ -3,6 +3,7 @@ package com.saucelabs.pages;
 import com.github.javafaker.Faker;
 import com.saucelabs.enitities.Item;
 import com.saucelabs.pages.config.Header;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static com.saucelabs.pages.config.ItemContainer.*;
 
+@Getter
 public class ProductsPage extends Header {
 
     @FindBy(className = "title")
@@ -28,10 +30,6 @@ public class ProductsPage extends Header {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getTitle() {
-        return title;
-    }
-
     public Item addRandomItemToCart() {
         waitToBeVisible(itemContainer);
 
@@ -45,7 +43,8 @@ public class ProductsPage extends Header {
 
         click(targetElement.findElement(ADD_TO_CART_BTN));
 
-        return new Item.ItemBuilder(itemName)
+        return Item.builder()
+                .name(itemName)
                 .desc(itemDesc)
                 .price(itemPrice)
                 .build();

@@ -1,12 +1,14 @@
 package com.saucelabs.pages;
 
 import com.saucelabs.enitities.User;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.saucelabs.pages.config.BasePage;
 
+@Getter
 public class LoginPage extends BasePage {
 
     @FindBy(id = "user-name")
@@ -24,22 +26,6 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-    }
-
-    public WebElement getUsernameFld() {
-        return usernameFld;
-    }
-
-    public WebElement getPasswordFld() {
-        return passwordFld;
-    }
-
-    public WebElement getLoginBtn() {
-        return loginBtn;
-    }
-
-    public WebElement getErrorMsg() {
-        return errorMsg;
     }
 
     public ProductsPage logIn(User user) {

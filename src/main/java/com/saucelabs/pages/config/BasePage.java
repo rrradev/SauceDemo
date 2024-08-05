@@ -13,26 +13,23 @@ import java.time.Duration;
 public abstract class BasePage {
 
     private static final Duration DEFAULT_TIMEOUT = Duration.ofMillis(3000L);
-    protected WebDriver driver;
 
-    public BasePage(WebDriver driver) {
+    protected WebDriver driver;
+    private WebDriverWait wait;
+
+    protected BasePage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
     }
 
-    public void waitToBeVisible(WebElement element, Duration timeout) {
-        final WebDriverWait wait = new WebDriverWait(driver, timeout);
+    protected void waitToBeVisible(WebElement element) {
         wait.pollingEvery(Duration.ofMillis(100L))
                 .until(ExpectedConditions.refreshed(
                         ExpectedConditions.visibilityOf(element)
                 ));
     }
 
-    public void waitToBeVisible(WebElement element) {
-        waitToBeVisible(element, DEFAULT_TIMEOUT);
-    }
-
-    public void waitToBeClickable(WebElement element, Duration timeout) {
-        final WebDriverWait wait = new WebDriverWait(driver, timeout);
+    protected void waitToBeClickable(WebElement element) {
         wait.pollingEvery(Duration.ofMillis(100L))
                 .until(ExpectedConditions.refreshed(
                         ExpectedConditions.elementToBeClickable(element)
@@ -40,19 +37,19 @@ public abstract class BasePage {
     }
 
     public void click(WebElement element) {
-        waitToBeClickable(element, DEFAULT_TIMEOUT);
+        waitToBeClickable(element);
         element.click();
     }
 
     public void type(WebElement element, String text) {
-        waitToBeClickable(element, DEFAULT_TIMEOUT);
+        waitToBeClickable(element);
         element.clear();
         element.sendKeys(text);
     }
 
-    public boolean canSee(WebElement element, Duration timeout) {
+    public boolean canSee(WebElement element) {
         try {
-            waitToBeVisible(element, timeout);
+            waitToBeVisible(element);
         } catch (TimeoutException te) {
             return false;
         }
@@ -60,12 +57,8 @@ public abstract class BasePage {
         return true;
     }
 
-    public boolean canSee(WebElement element) {
-        return canSee(element, Duration.ofMillis(0L));
-    }
-
     public String readFrom(WebElement element) {
-        waitToBeVisible(element, DEFAULT_TIMEOUT);
+        waitToBeVisible(element);
 
         return element.getText();
     }
