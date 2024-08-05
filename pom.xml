@@ -51,7 +51,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.2.1</version>
+            <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -73,6 +73,7 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
