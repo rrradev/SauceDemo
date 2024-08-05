@@ -40,10 +40,12 @@ public class CartPage extends Header {
             String itemDesc = readFrom(targetElement.findElement(ITEM_DESC));
             String itemPrice = readFrom(targetElement.findElement(ITEM_PRICE));
 
-            Item item = new Item.ItemBuilder(itemName)
+            Item item = Item.builder()
+                    .name(itemName)
                     .desc(itemDesc)
                     .price(itemPrice)
                     .build();
+
             items.add(item);
         }
 
