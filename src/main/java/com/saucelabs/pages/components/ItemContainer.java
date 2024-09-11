@@ -1,4 +1,4 @@
-package com.saucelabs.pages.config;
+package com.saucelabs.pages.components;
 
 import org.openqa.selenium.By;
 

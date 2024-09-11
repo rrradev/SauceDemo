@@ -1,7 +1,7 @@
 package com.saucelabs.pages;
 
 import com.saucelabs.enitities.Item;
-import com.saucelabs.pages.config.Header;
+import com.saucelabs.pages.config.BasePage;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,9 +11,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.saucelabs.pages.config.ItemContainer.*;
+import static com.saucelabs.pages.components.ItemContainer.*;
 
-public class CartPage extends Header {
+public class CartPage extends BasePage {
 
     @FindBy(className = "cart_item")
     WebElement itemContainer;
