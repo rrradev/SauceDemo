@@ -23,10 +23,10 @@ public class GlobalHooks extends BaseSteps implements ConcurrentEventListener {
     };
 
     private void beforeAll() {
-        setupDriver();
+
     }
 
     private void afterAll() {
-        driver.quit();
+
     }
 }

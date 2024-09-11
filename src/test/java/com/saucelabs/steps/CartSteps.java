@@ -7,10 +7,11 @@ import com.saucelabs.pages.LoginPage;
 import com.saucelabs.pages.ProductsPage;
 import com.saucelabs.steps.config.BaseSteps;
 import io.cucumber.java8.En;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.Collections;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartSteps extends BaseSteps implements En {
 
@@ -20,11 +21,9 @@ public class CartSteps extends BaseSteps implements En {
 
     public CartSteps() {
         Given("^.* is logged in$", () -> {
-            driver.manage().deleteAllCookies();
-            driver.get(CONFIG.getUrl());
-            ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();");
+            getDriver().get(CONFIG.getUrl());
             User user = new User(CONFIG.getUsername(), CONFIG.getPassword());
-            productsPage = new LoginPage(driver).logIn(user);
+            productsPage = new LoginPage(getDriver()).logIn(user);
         });
 
         When("^.* adds an item to .* cart$", () -> {
@@ -36,9 +35,9 @@ public class CartSteps extends BaseSteps implements En {
         });
 
         Then("^.* should see the item in .* cart$", () -> {
-            cartPage = new CartPage(driver);
+            cartPage = new CartPage(getDriver());
 
-            Assertions.assertThat(cartPage.getItems())
+            assertThat(cartPage.getItems())
                     .as("Added item and item in cart match")
                     .hasSize(1)
                     .usingRecursiveComparison()
@@ -46,9 +45,9 @@ public class CartSteps extends BaseSteps implements En {
         });
 
         Then("^the cart page should be empty$", () -> {
-            cartPage = new CartPage(driver);
+            cartPage = new CartPage(getDriver());
 
-            Assertions.assertThat(cartPage.isEmpty())
+            assertThat(cartPage.isEmpty())
                     .as("Cart is empty")
                     .isTrue();
         });

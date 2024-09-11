@@ -17,10 +17,12 @@ public class LoginSteps extends BaseSteps implements En {
 
     public LoginSteps() {
         Given("^.* is on the Login Page$", () -> {
-            driver.manage().deleteAllCookies();
-            driver.get(CONFIG.getUrl());
-            ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();");
-            loginPage = new LoginPage(driver);
+            getDriver().get(CONFIG.getUrl());
+            loginPage = new LoginPage(getDriver());
+        });
+
+        When("^.* logs? in with .* credentials:$", (User user) -> {
+            productsPage = loginPage.logIn(user);
         });
 
         Then("^.* should see the login form$", () -> {
@@ -35,10 +37,6 @@ public class LoginSteps extends BaseSteps implements En {
                     .as("Is login button displayed?")
                     .isTrue();
             softly.assertAll();
-        });
-
-        When("^.* logs? in with .* credentials:$", (User user) -> {
-            productsPage = loginPage.logIn(user);
         });
 
         Then("^.* should see the correct error:$", (DataTable table) -> {
