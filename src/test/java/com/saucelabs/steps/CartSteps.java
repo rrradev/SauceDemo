@@ -1,26 +1,33 @@
 package com.saucelabs.steps;
 
+import com.google.inject.Inject;
 import com.saucelabs.enitities.Item;
 import com.saucelabs.pages.CartPage;
 import com.saucelabs.pages.ProductsPage;
 import com.saucelabs.steps.config.BaseSteps;
+import com.saucelabs.steps.config.SauceDemoWorld;
 import io.cucumber.java8.En;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CartSteps extends BaseSteps implements En {
 
-    private ProductsPage productsPage;
-    private CartPage cartPage;
-    private Item randomItemAdded;
+    @Inject
+    SauceDemoWorld sauceDemoWorld;
+    ProductsPage productsPage;
+    CartPage cartPage;
 
     public CartSteps() {
 
         When("^.* adds an item to .* cart$", () -> {
             productsPage = new ProductsPage(getDriver());
-            randomItemAdded = productsPage.addRandomItemToCart();
+            final Item itemInCart = productsPage.addRandomItemToCart();
+            sauceDemoWorld.setItemInCart(itemInCart);
         });
 
         When("^.* navigates? to the Cart page$", () -> {
@@ -35,7 +42,7 @@ public class CartSteps extends BaseSteps implements En {
                     .as("Added item and item in cart match")
                     .hasSize(1)
                     .usingRecursiveComparison()
-                    .isEqualTo(Collections.singletonList(randomItemAdded));
+                    .isEqualTo(Collections.singletonList(sauceDemoWorld.getItemInCart()));
         });
 
         Then("^the cart page should be empty$", () -> {
