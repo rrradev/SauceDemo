@@ -1,13 +1,10 @@
 package com.saucelabs.steps;
 
 import com.saucelabs.enitities.Item;
-import com.saucelabs.enitities.User;
 import com.saucelabs.pages.CartPage;
-import com.saucelabs.pages.LoginPage;
 import com.saucelabs.pages.ProductsPage;
 import com.saucelabs.steps.config.BaseSteps;
 import io.cucumber.java8.En;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.Collections;
 
@@ -20,17 +17,14 @@ public class CartSteps extends BaseSteps implements En {
     private Item randomItemAdded;
 
     public CartSteps() {
-        Given("^.* is logged in$", () -> {
-            getDriver().get(CONFIG.getUrl());
-            User user = new User(CONFIG.getUsername(), CONFIG.getPassword());
-            productsPage = new LoginPage(getDriver()).logIn(user);
-        });
 
         When("^.* adds an item to .* cart$", () -> {
+            productsPage = new ProductsPage(getDriver());
             randomItemAdded = productsPage.addRandomItemToCart();
         });
 
         When("^.* navigates? to the Cart page$", () -> {
+            productsPage = new ProductsPage(getDriver());
             productsPage.click(productsPage.getHeader().getCartBtn());
         });
 

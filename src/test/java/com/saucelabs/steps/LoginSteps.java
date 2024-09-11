@@ -4,11 +4,11 @@ import com.saucelabs.enitities.User;
 import com.saucelabs.steps.config.BaseSteps;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java8.En;
-import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.JavascriptExecutor;
 import com.saucelabs.pages.LoginPage;
 import com.saucelabs.pages.ProductsPage;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps extends BaseSteps implements En {
 
@@ -16,9 +16,16 @@ public class LoginSteps extends BaseSteps implements En {
     private ProductsPage productsPage;
 
     public LoginSteps() {
+
         Given("^.* is on the Login Page$", () -> {
             getDriver().get(CONFIG.getUrl());
             loginPage = new LoginPage(getDriver());
+        });
+
+        Given("^.* is logged in$", () -> {
+            getDriver().get(CONFIG.getUrl());
+            User user = new User(CONFIG.getUsername(), CONFIG.getPassword());
+            productsPage = new LoginPage(getDriver()).logIn(user);
         });
 
         When("^.* logs? in with .* credentials:$", (User user) -> {
@@ -42,13 +49,13 @@ public class LoginSteps extends BaseSteps implements En {
         Then("^.* should see the correct error:$", (DataTable table) -> {
             String error = table.transpose().asMap().get("error");
 
-            Assertions.assertThat(loginPage.readFrom(loginPage.getErrorMsg()))
+            assertThat(loginPage.readFrom(loginPage.getErrorMsg()))
                     .as("Is correct error message displayed?")
                     .contains(error);
         });
 
         Then("^.* should see the Products page:$", () -> {
-            Assertions.assertThat(productsPage.readFrom(productsPage.getTitle()))
+            assertThat(productsPage.readFrom(productsPage.getTitle()))
                     .as("Correct title is displayed")
                     .isEqualToIgnoringCase("Products");
         });
