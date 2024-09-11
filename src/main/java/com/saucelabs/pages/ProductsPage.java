@@ -2,7 +2,8 @@ package com.saucelabs.pages;
 
 import com.github.javafaker.Faker;
 import com.saucelabs.enitities.Item;
-import com.saucelabs.pages.config.Header;
+import com.saucelabs.pages.config.BasePage;
+import com.saucelabs.pages.components.Header;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,10 +12,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static com.saucelabs.pages.config.ItemContainer.*;
+import static com.saucelabs.pages.components.ItemContainer.*;
 
 @Getter
-public class ProductsPage extends Header {
+public class ProductsPage extends BasePage {
+
+    Header header;
 
     @FindBy(className = "title")
     WebElement title;
@@ -27,6 +30,7 @@ public class ProductsPage extends Header {
 
     public ProductsPage(WebDriver driver) {
         super(driver);
+        this.header = new Header(driver);
         PageFactory.initElements(driver, this);
     }
 

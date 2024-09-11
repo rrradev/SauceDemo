@@ -32,7 +32,7 @@ public class CartSteps extends BaseSteps implements En {
         });
 
         When("^.* navigates? to the Cart page$", () -> {
-            productsPage.click(productsPage.getCartBtn());
+            productsPage.click(productsPage.getHeader().getCartBtn());
         });
 
         Then("^.* should see the item in .* cart$", () -> {
