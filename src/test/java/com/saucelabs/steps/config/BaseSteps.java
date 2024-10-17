@@ -1,5 +1,6 @@
 package com.saucelabs.steps.config;
 
+import com.google.inject.Inject;
 import com.saucelabs.utils.ConfigHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.AccessLevel;
@@ -10,13 +11,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import static java.lang.Boolean.parseBoolean;
 
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class BaseSteps {
 
-    protected static ConfigHelper CONFIG = ConfigHelper.getInstance();
+    protected static final ConfigHelper CONFIG = ConfigHelper.getInstance();
 
-    static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    static String ENV_HEADLESS = System.getenv("ENV_HEADLESS");
+    static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    static final String ENV_HEADLESS = System.getenv("ENV_HEADLESS");
+
+    @Inject
+    protected SauceDemoWorld sauceDemoWorld;
 
     protected WebDriver getDriver() {
         return driver.get();
