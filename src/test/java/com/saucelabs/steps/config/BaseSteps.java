@@ -2,14 +2,21 @@ package com.saucelabs.steps.config;
 
 import com.saucelabs.utils.ConfigHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import static java.lang.Boolean.parseBoolean;
+
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public abstract class BaseSteps {
 
-    protected static final ConfigHelper CONFIG = ConfigHelper.getInstance();
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    protected static ConfigHelper CONFIG = ConfigHelper.getInstance();
+
+    static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    static String ENV_HEADLESS = System.getenv("ENV_HEADLESS");
 
     protected WebDriver getDriver() {
         return driver.get();
@@ -19,7 +26,9 @@ public abstract class BaseSteps {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        if(parseBoolean(ENV_HEADLESS)) {
+            options.addArguments("--headless");
+        }
         options.addArguments("--disable-search-engine-choice-screen");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
