@@ -17,8 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CartSteps extends BaseSteps implements En {
 
-    @Inject
-    SauceDemoWorld sauceDemoWorld;
     ProductsPage productsPage;
     CartPage cartPage;
 
