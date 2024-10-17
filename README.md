@@ -2,7 +2,7 @@
 [![CucumberReports: GitHub Actions](https://messages.cucumber.io/api/report-collections/ec306c93-4a72-4b89-b1ea-85ac3752222f/badge)](https://reports.cucumber.io/report-collections/ec306c93-4a72-4b89-b1ea-85ac3752222f)
 
 Simple test automation framework with Selenium & Cucumber.\
-The framework demonstrates the use of POM, PageFactory, sharing state with DI, Fluent Waits & Fluent Assertions.\
+The framework demonstrates the use of POM, PageFactory, Sharing state with DI, Dynamic test data, Fluent Waits & Fluent Assertions.\
 The tests are scheduled to run in a CI workflow through GitHub Actions (every day at 00:00).\
 The feature files run in parallel.
 

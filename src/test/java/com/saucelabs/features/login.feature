@@ -15,12 +15,12 @@ Feature: Login
       | error   |
       | <error> |
     Examples:
-      | username        | password     | error                                                       |
-      | [empty]         | [empty]      | Username is required                                        |
-      | [empty]         | secret_sauce | Username is required                                        |
-      | standard_user   | [empty]      | Password is required                                        |
-      | SAERSADA        | KLASDd       | Username and password do not match any user in this service |
-      | locked_out_user | secret_sauce | Sorry, this user has been locked out.                       |
+      | username        | password        | error                                                       |
+      | [empty]         | [empty]         | Username is required                                        |
+      | [empty]         | secret_sauce    | Username is required                                        |
+      | standard_user   | [empty]         | Password is required                                        |
+      | $randomUsername | $randomPassword | Username and password do not match any user in this service |
+      | locked_out_user | secret_sauce    | Sorry, this user has been locked out.                       |
 #######################################################################
   Scenario Outline: Log in with correct credentials
     When Alex logs in with her credentials:
