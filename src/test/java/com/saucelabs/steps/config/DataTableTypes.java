@@ -1,6 +1,6 @@
 package com.saucelabs.steps.config;
 
-import com.saucelabs.utils.SauceFaker;
+import com.saucelabs.utils.random.Randomizer;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java8.LambdaGlue;
 
@@ -15,7 +15,7 @@ public class DataTableTypes implements LambdaGlue {
         DefaultDataTableEntryTransformer("[empty]", (Map<String, String> tableRow, Type toValueType) -> {
             for (Map.Entry<String, String> entry : tableRow.entrySet()) {
                 String value = entry.getValue();
-                String randomValue = SauceFaker.random(value);
+                String randomValue = Randomizer.random(value);
                 if (!value.equals(randomValue)) {
                     tableRow.replace(entry.getKey(), randomValue);
                 }
