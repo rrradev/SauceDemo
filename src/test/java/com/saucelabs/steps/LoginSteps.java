@@ -24,7 +24,10 @@ public class LoginSteps extends BaseSteps implements En {
 
         Given("^.* is logged in$", () -> {
             getDriver().get(CONFIG.getUrl());
-            User user = new User(CONFIG.getUsername(), CONFIG.getPassword());
+            User user = User.builder()
+                    .username(CONFIG.getUsername())
+                    .password(CONFIG.getPassword())
+                    .build();
             productsPage = new LoginPage(getDriver()).logIn(user);
         });
 
