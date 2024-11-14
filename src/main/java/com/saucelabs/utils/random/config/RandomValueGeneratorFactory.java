@@ -5,7 +5,7 @@ import lombok.SneakyThrows;
 public class RandomValueGeneratorFactory {
 
     @SneakyThrows
-    public static IRandomValueGenerator getGenerator(String expression) {
+    public static RandomValueGenerator getGenerator(String expression) {
         return Generator.getGeneratorClass(expression).getDeclaredConstructor().newInstance();
     }
 

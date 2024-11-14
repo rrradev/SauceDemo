@@ -1,8 +1,8 @@
 package com.saucelabs.utils.random.generators;
 
-import com.saucelabs.utils.random.config.IRandomValueGenerator;
+import com.saucelabs.utils.random.config.RandomValueGenerator;
 
-public class UsernameGenerator implements IRandomValueGenerator {
+public class UsernameGenerator implements RandomValueGenerator {
 
     @Override
     public String generate() {

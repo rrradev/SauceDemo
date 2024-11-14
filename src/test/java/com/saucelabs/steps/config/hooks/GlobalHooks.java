@@ -1,5 +1,6 @@
-package com.saucelabs.steps.config;
+package com.saucelabs.steps.config.hooks;
 
+import com.saucelabs.steps.config.BaseSteps;
 import io.cucumber.plugin.ConcurrentEventListener;
 import io.cucumber.plugin.event.EventHandler;
 import io.cucumber.plugin.event.EventPublisher;

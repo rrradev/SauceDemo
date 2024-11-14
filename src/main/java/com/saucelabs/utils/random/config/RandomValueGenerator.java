@@ -2,7 +2,7 @@ package com.saucelabs.utils.random.config;
 
 import com.github.javafaker.Faker;
 
-public interface IRandomValueGenerator {
+public interface RandomValueGenerator {
 
     Faker faker = Faker.instance();
 
