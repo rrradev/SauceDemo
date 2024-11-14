@@ -7,36 +7,37 @@ import io.cucumber.java8.En;
 import org.assertj.core.api.SoftAssertions;
 import com.saucelabs.pages.LoginPage;
 import com.saucelabs.pages.ProductsPage;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps extends BaseSteps implements En {
 
+    @Autowired
     private LoginPage loginPage;
+    @Autowired
     private ProductsPage productsPage;
 
     public LoginSteps() {
 
         Given("^.* is on the Login Page$", () -> {
-            getDriver().get(CONFIG.getUrl());
-            loginPage = new LoginPage(getDriver());
+            driver.get(CONFIG.getUrl());
         });
 
         Given("^.* is logged in$", () -> {
-            getDriver().get(CONFIG.getUrl());
+            driver.get(CONFIG.getUrl());
             User user = User.builder()
                     .username(CONFIG.getUsername())
                     .password(CONFIG.getPassword())
                     .build();
-            productsPage = new LoginPage(getDriver()).logIn(user);
+            loginPage.logIn(user);
         });
 
         When("^.* logs? in with .* credentials:$", (User user) -> {
-            productsPage = loginPage.logIn(user);
+            loginPage.logIn(user);
         });
 
         Then("^.* should see the login form$", () -> {
-            SoftAssertions softly = new SoftAssertions();
             softly.assertThat(loginPage.canSee(loginPage.getUsernameFld()))
                     .as("Is username field displayed?")
                     .isTrue();

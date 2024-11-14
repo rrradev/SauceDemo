@@ -2,7 +2,7 @@ package com.saucelabs.pages.components;
 
 import org.openqa.selenium.By;
 
-public class ItemContainer {
+public class ItemCard {
 
     public static final By ITEM_NAME = By.cssSelector("div.inventory_item_name");
     public static final By ITEM_DESC = By.cssSelector("div.inventory_item_desc");

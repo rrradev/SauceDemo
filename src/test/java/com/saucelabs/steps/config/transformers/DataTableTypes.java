@@ -1,6 +1,7 @@
-package com.saucelabs.steps.config;
+package com.saucelabs.steps.config.transformers;
 
 import com.saucelabs.utils.random.Randomizer;
+
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java8.LambdaGlue;
 

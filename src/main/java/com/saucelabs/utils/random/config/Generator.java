@@ -17,9 +17,9 @@ public enum Generator {
     PASSWORD("$randomPassword", PasswordGenerator.class);
 
     String expression;
-    Class<? extends IRandomValueGenerator> generatorClass;
+    Class<? extends RandomValueGenerator> generatorClass;
 
-    protected static Class<? extends IRandomValueGenerator> getGeneratorClass(String expression) {
+    protected static Class<? extends RandomValueGenerator> getGeneratorClass(String expression) {
         return Arrays.stream(values())
                 .filter(generatorWithExpression(expression))
                 .findFirst()
