@@ -10,3 +10,11 @@ Cucumber report is published here: [![CucumberReports: GitHub Actions](https://m
 
 SUT: https://www.saucedemo.com/
 
+#### Requirements:
+- Java 8
+
+#### Running the tests:
+`mvn test`
+  
+
+  
