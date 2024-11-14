@@ -29,16 +29,6 @@ public abstract class BasePage {
         this.wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
     }
 
-    protected void waitToBeVisible(WebElement element) {
-        wait.pollingEvery(Duration.ofMillis(100L))
-                .until(refreshed(ExpectedConditions.visibilityOf(element)));
-    }
-
-    protected void waitToBeClickable(WebElement element) {
-        wait.pollingEvery(Duration.ofMillis(100L))
-                .until(refreshed(ExpectedConditions.elementToBeClickable(element)));
-    }
-
     public void click(WebElement element) {
         waitToBeClickable(element);
         element.click();
@@ -80,5 +70,15 @@ public abstract class BasePage {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void waitToBeVisible(WebElement element) {
+        wait.pollingEvery(Duration.ofMillis(100L))
+                .until(refreshed(ExpectedConditions.visibilityOf(element)));
+    }
+
+    protected void waitToBeClickable(WebElement element) {
+        wait.pollingEvery(Duration.ofMillis(100L))
+                .until(refreshed(ExpectedConditions.elementToBeClickable(element)));
     }
 }
