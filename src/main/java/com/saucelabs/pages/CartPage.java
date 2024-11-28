@@ -21,6 +21,9 @@ public class CartPage extends BasePage {
     @FindBy(className = "cart_item")
     List<WebElement> itemCards;
 
+    @FindBy(id = "checkout")
+    WebElement checkoutButton;
+
     public List<Item> getItems() {
         List<Item> items = new ArrayList<>();
 
@@ -48,7 +51,7 @@ public class CartPage extends BasePage {
     }
 
     public boolean isEmpty() {
-        waitForPageToLoad();
+        waitToBeVisible(checkoutButton);
 
         return !canSee(itemCard);
     }

@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +12,7 @@ import javax.annotation.PostConstruct;
 import java.time.Duration;
 
 import static com.saucelabs.driver.DriverUtils.javascriptExecutor;
-import static org.openqa.selenium.support.ui.ExpectedConditions.refreshed;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public abstract class BasePage {
 
@@ -74,11 +73,11 @@ public abstract class BasePage {
 
     protected void waitToBeVisible(WebElement element) {
         wait.pollingEvery(Duration.ofMillis(100L))
-                .until(refreshed(ExpectedConditions.visibilityOf(element)));
+                .until(refreshed(visibilityOf(element)));
     }
 
     protected void waitToBeClickable(WebElement element) {
         wait.pollingEvery(Duration.ofMillis(100L))
-                .until(refreshed(ExpectedConditions.elementToBeClickable(element)));
+                .until(refreshed(elementToBeClickable(element)));
     }
 }
