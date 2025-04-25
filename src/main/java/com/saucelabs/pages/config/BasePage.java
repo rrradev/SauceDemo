@@ -4,14 +4,12 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.time.Duration;
 
-import static com.saucelabs.driver.DriverUtils.javascriptExecutor;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public abstract class BasePage {
@@ -20,12 +18,12 @@ public abstract class BasePage {
 
     @Autowired
     protected WebDriver driver;
-    private WebDriverWait wait;
+    @Autowired
+    private FluentWait<WebDriver> defaultWait;
 
     @PostConstruct
     private void init() {
         PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
     }
 
     public void click(WebElement element) {
@@ -55,29 +53,11 @@ public abstract class BasePage {
         return element.getText();
     }
 
-    public void waitForPageToLoad() {
-        ExpectedCondition<Boolean> expectation = driver ->
-                (javascriptExecutor(driver))
-                        .executeScript("return document.readyState")
-                        .toString()
-                        .equals("complete");
-
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            wait.pollingEvery(Duration.ofMillis(500L))
-                    .until(expectation);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     protected void waitToBeVisible(WebElement element) {
-        wait.pollingEvery(Duration.ofMillis(100L))
-                .until(refreshed(visibilityOf(element)));
+        defaultWait.until(refreshed(visibilityOf(element)));
     }
 
     protected void waitToBeClickable(WebElement element) {
-        wait.pollingEvery(Duration.ofMillis(100L))
-                .until(refreshed(elementToBeClickable(element)));
+        defaultWait.until(refreshed(elementToBeClickable(element)));
     }
 }
