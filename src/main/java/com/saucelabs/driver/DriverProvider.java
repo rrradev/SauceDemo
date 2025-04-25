@@ -25,10 +25,14 @@ public class DriverProvider {
         if (parseBoolean(ENV_HEADLESS)) {
             options.addArguments("--headless");
         }
-        options.addArguments("--disable-search-engine-choice-screen");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--remote-allow-origins=*");
+
+        options.addArguments(
+                "--disable-search-engine-choice-screen",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--remote-allow-origins=*",
+                "--incognito"
+        );
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();

@@ -3,7 +3,6 @@ package com.saucelabs.pages;
 import com.saucelabs.context.PageObj;
 import com.saucelabs.enitities.Item;
 import com.saucelabs.pages.config.BasePage;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,9 +26,7 @@ public class CartPage extends BasePage {
     public List<Item> getItems() {
         List<Item> items = new ArrayList<>();
 
-        try {
-            waitToBeVisible(itemCard);
-        } catch (TimeoutException te) {
+        if(isEmpty()) {
             return items;
         }
 
